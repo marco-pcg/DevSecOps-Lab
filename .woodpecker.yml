@@ -1,0 +1,19 @@
+when:
+  - event: [push, pull_request]
+
+steps:
+  validate:
+    image: alpine:3.20.3
+    commands:
+      - apk add --no-cache bash git
+      - ./scripts/validate.sh
+  build:
+    image: docker:27.3.1-cli
+    commands:
+      - docker build --tag devsecops-lab:ci .
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+# The Docker socket is intentionally explicit for teaching. Use an isolated,
+# rootless runner in any environment containing valuable workloads.
+

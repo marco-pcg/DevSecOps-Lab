@@ -1,0 +1,14 @@
+name: local-ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: docker
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate
+        run: ./scripts/validate.sh
+

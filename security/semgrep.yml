@@ -1,0 +1,11 @@
+rules:
+  - id: teaching-no-hardcoded-secret
+    languages: [python]
+    message: "Do not hard-code credentials; use environment or a secret manager."
+    severity: ERROR
+    patterns:
+      - pattern: $VALUE = "..."
+      - metavariable-regex:
+          metavariable: $VALUE
+          regex: "(?i).*(password|secret|token|api[_-]?key).*"
+

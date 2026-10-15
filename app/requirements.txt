@@ -1,0 +1,2 @@
+# The fixture intentionally uses only Python's standard library.
+

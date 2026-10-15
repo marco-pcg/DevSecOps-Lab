@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devsecops-lab
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: devsecops-lab
+  template:
+    metadata:
+      labels:
+        app: devsecops-lab
+    spec:
+      containers:
+        - name: app
+          image: devsecops-lab:local
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: tmp
+          emptyDir: {}
+

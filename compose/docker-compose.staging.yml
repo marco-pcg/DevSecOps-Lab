@@ -1,0 +1,14 @@
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    image: devsecops-lab:staging
+    ports:
+      - "127.0.0.1:${STAGING_PORT:-8081}:8080"
+    environment:
+      PORT: "8080"
+    read_only: true
+    tmpfs:
+      - /tmp
+

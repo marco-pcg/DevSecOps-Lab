@@ -1,0 +1,15 @@
+log:
+  level: info
+
+runner:
+  file: .runner
+  capacity: 1
+  timeout: 30m
+
+container:
+  network: "host"
+  # Teaching-only example. Prefer rootless, isolated execution.
+  options: "-v /var/run/docker.sock:/var/run/docker.sock"
+
+# Registration tokens belong in the runner host's secret store, not this file.
+

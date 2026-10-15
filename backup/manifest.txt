@@ -1,0 +1,4 @@
+This directory contains local teaching backup artifacts.
+Backups are generated under backups/ and are intentionally gitignored.
+Never put credentials, production data, or private keys in this repository.
+
