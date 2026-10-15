@@ -10,5 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Validate
-        run: ./scripts/validate.sh
-
+        run: |
+          test -f README.md
+          test -f Dockerfile
+          test -f app/app.py
+          test -f compose/docker-compose.dev.yml
+          test -f compose/docker-compose.staging.yml
+          test -f security/semgrep.yml
+          test -f security/trivy.yaml

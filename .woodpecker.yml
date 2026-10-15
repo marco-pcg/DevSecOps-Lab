@@ -6,7 +6,13 @@ steps:
     image: alpine:3.20.3
     commands:
       - apk add --no-cache bash git
-      - ./scripts/validate.sh
+      - test -f README.md
+      - test -f Dockerfile
+      - test -f app/app.py
+      - test -f compose/docker-compose.dev.yml
+      - test -f compose/docker-compose.staging.yml
+      - test -f security/semgrep.yml
+      - test -f security/trivy.yaml
   build:
     image: docker:27.3.1-cli
     commands:
@@ -16,4 +22,3 @@ steps:
 
 # The Docker socket is intentionally explicit for teaching. Use an isolated,
 # rootless runner in any environment containing valuable workloads.
-

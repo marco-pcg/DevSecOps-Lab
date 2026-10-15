@@ -7,4 +7,4 @@ backups/*.tar.gz
 backups/*.sha256
 dist/
 .kube/
-
+scripts/
