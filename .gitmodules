@@ -1,0 +1,9 @@
+[submodule "escape-rooms/escape_room_git_3"]
+	path = escape-rooms/escape_room_git_3
+	url = https://github.com/profdiegocbcastro/escape_room_git_3.git
+[submodule "escape-rooms/escape_room_git_4"]
+	path = escape-rooms/escape_room_git_4
+	url = https://github.com/marco-pcg/escape_room_git_4.git
+[submodule "escape-rooms/escape_room_git_5"]
+	path = escape-rooms/escape_room_git_5
+	url = https://github.com/marco-pcg/escape_room_git_5.git

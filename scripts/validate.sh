@@ -26,19 +26,22 @@ try:
 except ImportError:
     print("PyYAML unavailable; skipping YAML parse")
 else:
-    for path in pathlib.Path(".").rglob("*.yml"):
-        yaml.safe_load(path.read_text())
-    for path in pathlib.Path(".").rglob("*.yaml"):
+    yaml_paths = [
+        path for pattern in ("*.yml", "*.yaml")
+        for path in pathlib.Path(".").rglob(pattern)
+        if ".git" not in path.parts and "escape-rooms" not in path.parts
+    ]
+    for path in yaml_paths:
         yaml.safe_load(path.read_text())
     print("YAML parse: ok")
 PY
 fi
 
 if grep -RInE 'password: *[^$<({[:space:]]|token: *[^$<({[:space:]]' \
+  --exclude-dir=.git --exclude-dir=escape-rooms \
   --include='*.yml' --include='*.yaml' --include='*.env' .; then
   echo "possible hard-coded credential found" >&2
   exit 1
 fi
 
 echo "validation: ok"
-

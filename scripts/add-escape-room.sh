@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-room="${1:?usage: add-escape-room.sh <room-01|room-02|room-03> <repository-url>}"
-url="${2:?usage: add-escape-room.sh <room-01|room-02|room-03> <repository-url>}"
+room="${1:?usage: add-escape-room.sh <escape_room_git_3|escape_room_git_4|escape_room_git_5> <repository-url>}"
+url="${2:?usage: add-escape-room.sh <escape_room_git_3|escape_room_git_4|escape_room_git_5> <repository-url>}"
 
 case "$room" in
-  room-01|room-02|room-03) ;;
-  *) echo "room must be room-01, room-02, or room-03" >&2; exit 2 ;;
+  escape_room_git_3|escape_room_git_4|escape_room_git_5) ;;
+  *) echo "room must be escape_room_git_3, escape_room_git_4, or escape_room_git_5" >&2; exit 2 ;;
 esac
 
 case "$url" in
@@ -21,4 +21,3 @@ test ! -e "escape-rooms/$room" || {
 
 git submodule add "$url" "escape-rooms/$room"
 echo "Added $room. Review the pinned commit, then commit .gitmodules and the submodule entry."
-

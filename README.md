@@ -47,11 +47,10 @@ git switch lesson/00-foundation
 git switch lesson/01-compose-ci
 ```
 
-The three escape-room projects belong under `escape-rooms/` as Git submodules.
-That keeps their histories independent while this repository pins the exact
-commits used by the teaching path. Their URLs are not included until the
-canonical repositories are identified; see
-[`escape-rooms/README.md`](escape-rooms/README.md).
+The three escape-room projects belong under `escape-rooms/` as Git submodules:
+`escape_room_git_3`, `escape_room_git_4`, and `escape_room_git_5`. This keeps
+their histories independent while this repository pins the exact commits used
+by the teaching path. See [`escape-rooms/README.md`](escape-rooms/README.md).
 
 | Branch | Focus | What to inspect |
 | --- | --- | --- |
@@ -179,5 +178,6 @@ git add .gitmodules escape-rooms/room-01
 git commit -m "pin room 01 lesson revision"
 ```
 
-Use `./scripts/add-escape-room.sh room-01 <repository-url>` for the initial
-integration. Never put credentials in submodule URLs.
+Use `git submodule update --remote --merge` only when intentionally advancing
+a room; review and commit the resulting gitlink. Never put credentials in
+submodule URLs.
