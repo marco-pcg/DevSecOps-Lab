@@ -47,6 +47,12 @@ git switch lesson/00-foundation
 git switch lesson/01-compose-ci
 ```
 
+The three escape-room projects belong under `escape-rooms/` as Git submodules.
+That keeps their histories independent while this repository pins the exact
+commits used by the teaching path. Their URLs are not included until the
+canonical repositories are identified; see
+[`escape-rooms/README.md`](escape-rooms/README.md).
+
 | Branch | Focus | What to inspect |
 | --- | --- | --- |
 | `lesson/00-foundation` | Minimal app and reproducible repository | `app/`, `Dockerfile`, `.gitignore` |
@@ -163,3 +169,15 @@ rm -f .env
 The commands above remove only this lab's Compose resources. Review
 `docker volume ls` before removing anything manually.
 
+## Updating escape-room modules
+
+```bash
+git submodule update --init --recursive
+git -C escape-rooms/room-01 fetch --tags
+git -C escape-rooms/room-01 checkout <lesson-commit>
+git add .gitmodules escape-rooms/room-01
+git commit -m "pin room 01 lesson revision"
+```
+
+Use `./scripts/add-escape-room.sh room-01 <repository-url>` for the initial
+integration. Never put credentials in submodule URLs.
