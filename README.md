@@ -59,8 +59,8 @@ by the teaching path. See [`escape-rooms/README.md`](escape-rooms/README.md).
 | `lesson/02-secrets-sast` | Placeholder secrets and static analysis | `.env.example`, `security/semgrep.yml` |
 | `lesson/03-dependencies-sbom` | Dependency audit and SBOM generation | `requirements.txt`, `security/trivy.yaml` |
 | `lesson/04-image-signing` | Digest awareness and image signing workflow | `docs/image-signing.md` |
-| `lesson/05-staging-dast` | Staging-like target and smoke/DAST checks | `compose/docker-compose.staging.yml` |
-| `lesson/06-github-mirror-backups` | Offline backup and restore testing | `backup/` |
+| `lesson/05-staging-dast` | Staging-like target and smoke/DAST checks | `compose/docker-compose.staging.yml`, `scripts/dast-smoke.sh` |
+| `lesson/06-github-mirror-backups` | Offline backup and restore testing | `backup/`, `scripts/backup.sh`, `scripts/restore-test.sh` |
 | `lesson/07-forgejo-actions` | Self-hosted Forgejo runner shape | `forgejo/` |
 | `lesson/08-kubernetes` | k3d-compatible Kubernetes overlay | `k8s/` |
 
@@ -73,9 +73,7 @@ git worktree add /tmp/devsecops-lesson-02 lesson/02-secrets-sast
 
 ## Validation
 
-The `scripts/` directory is intentionally ignored and is not part of the
-committed teaching repository. CI performs its portable file checks directly.
-If you have the local helper scripts in your working copy, run:
+Run the repository's local checks:
 
 ```bash
 ./scripts/validate.sh
@@ -122,7 +120,6 @@ Start the staging-shaped target:
 
 ```bash
 docker compose -f compose/docker-compose.staging.yml up --build -d
-# If the local helper exists:
 ./scripts/dast-smoke.sh http://127.0.0.1:8081
 docker compose -f compose/docker-compose.staging.yml down
 ```
@@ -136,7 +133,6 @@ program.
 The backup example writes a compressed archive and checksum to `backups/`:
 
 ```bash
-# If the local helpers exist:
 ./scripts/backup.sh
 ./scripts/restore-test.sh backups/devsecops-lab-*.tar.gz
 ```
